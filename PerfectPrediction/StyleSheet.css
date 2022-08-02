@@ -1,0 +1,95 @@
+﻿@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&family=Press+Start+2P&display=swap");
+
+:root {
+    --color1: #113160;
+    --color2: #ffffff;
+    --color3: #cc0106;
+    --form-font-size: 22px;
+}
+
+body {
+    background-color: var(--color1);
+    color: var(--color2);
+    font-family: "Arial";
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.teams {
+    margin-top: 40px;
+    margin-bottom: 25px;
+}
+
+    .teams img {
+        max-width: 250px;
+        max-height: 250px;
+    }
+
+.line1 {
+    font-size: 42px;
+    font-family: "Press Start 2P";
+    color: var(--color1);
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .line1 span {
+        background-color: var(--color2);
+        padding: 5px;
+        padding-bottom: 0px;
+    }
+
+        .line1 span:nth-of-type(n + 1) {
+            margin-right: 5px;
+        }
+
+.line2 {
+    font-size: 55px;
+    font-family: "Open Sans";
+}
+
+.line3 {
+    background-color: var(--color3);
+    width: fit-content;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+}
+
+.sponsorLogo {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .sponsorLogo img {
+        width: 300px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+
+.form {
+    background-color: var(--color2);
+    color: var(--color1);
+    padding: 10px;
+    font-size: var(--form-font-size);
+}
+
+    .form input {
+        font-size: var(--form-font-size);
+        margin-bottom: 5px;
+    }
+
+    .form .prediction {
+        background-color: #ffffff;
+    }
+
+    .form button {
+        background-color: var(--color3);
+        color: var(--color2);
+        border-style: none;
+        font-size: var(--form-font-size);
+    }

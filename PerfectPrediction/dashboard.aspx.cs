@@ -16,7 +16,7 @@ namespace PerfectPrediction
         {
             if (Session["TenantID"] == null)
             {
-                Response.Redirect("default.aspx");
+                Response.Redirect("login.aspx");
             }
         }
 
