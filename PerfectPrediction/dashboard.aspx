@@ -12,6 +12,11 @@
             width: 200px; 
             text-align: right;
         }
+
+        .teamImage {
+            max-height: 100px;
+            max-width: 100px;
+        }
     </style>
 </head>
 <body>
@@ -106,10 +111,14 @@ ORDER BY [GameTime]" UpdateCommand="UPDATE [Games] SET [HomeTeamID] = @HomeTeamI
             <asp:Label CssClass="label" ID="Label2" runat="server" Text="Home team"></asp:Label>
             <ajaxToolkit:ComboBox ID="cbHomeTeam" runat="server" DataSourceID="sqlDataSourceTeams" DataTextField="Name" DataValueField="Id" MaxLength="0" OnItemInserting="comboboxTeam_ItemInserting" style="display: inline;">
             </ajaxToolkit:ComboBox>
+            <asp:Image ID="imgHomeTeam" runat="server" CssClass="teamImage" />
+            <asp:FileUpload ID="FileUploadHomeTeam" runat="server" />
             <br />
             <asp:Label CssClass="label" ID="Label3" runat="server" Text="Away team"></asp:Label>
             <ajaxToolkit:ComboBox ID="cbAwayTeam" runat="server" DataSourceID="sqlDataSourceTeams" DataTextField="Name" DataValueField="Id" MaxLength="0" style="display: inline;" OnItemInserting="comboboxTeam_ItemInserting">
             </ajaxToolkit:ComboBox>
+            <asp:Image ID="imgAwayTeam" runat="server" CssClass="teamImage" />
+            <asp:FileUpload ID="FileUploadAwayTeam" runat="server" />
             <br />
             <asp:Label CssClass="label" ID="Label4" runat="server" Text="Home score"></asp:Label>
             <asp:TextBox ID="txtHomeScore" runat="server"></asp:TextBox>

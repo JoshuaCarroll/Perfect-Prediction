@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Diagnostics;
+using System.IO;
 
 namespace PerfectPrediction
 {
@@ -22,55 +23,63 @@ namespace PerfectPrediction
 
         protected void gridViewGames_SelectedIndexChanged(object sender, EventArgs e)
         {
-            gridViewGames.Visible = false;
-            pnlEditGame.Visible = true;
+            if (gridViewGames.SelectedIndex != -1)
+            {
+                gridViewGames.Visible = false;
+                pnlEditGame.Visible = true;
 
-            int GameID = int.Parse(gridViewGames.SelectedDataKey.Value.ToString());
+                int GameID = int.Parse(gridViewGames.SelectedDataKey.Value.ToString());
 
-            hdnGameId.Value = GameID.ToString();
+                hdnGameId.Value = GameID.ToString();
 
-            string queryString = @"SELECT Games.ID, HomeTeamID, HomeTeam.Name, AwayTeamID, AwayTeam.Name, GameTime, HomeTeamScore, AwayTeamScore, Predictions.Name [Winner], Predictions.Email [WinnerEmail]
+                string queryString = @"SELECT Games.ID, HomeTeamID, HomeTeam.Name, AwayTeamID, AwayTeam.Name, GameTime, HomeTeamScore, AwayTeamScore, Predictions.Name [Winner], Predictions.Email [WinnerEmail]
 FROM Games 
 INNER JOIN Teams [AwayTeam] on AwayTeamID = AwayTeam.ID 
 INNER JOIN Teams [HomeTeam] on HomeTeamID = HomeTeam.ID
 LEFT JOIN Predictions on Games.WinningPredictionID = Predictions.ID
 WHERE Games.ID = @id";
 
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
-            {
-                SqlCommand command = new SqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@id", GameID);
-                connection.Open();
-
-                SqlDataReader reader = command.ExecuteReader();
-                try
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
                 {
-                    reader.Read();
-                    cbAwayTeam.SelectedValue = reader["AwayTeamID"].ToString();
-                    cbHomeTeam.SelectedValue = reader["HomeTeamID"].ToString();
-                    txtGametime.Text = reader["GameTime"].ToString();
-                    txtAwayScore.Text = reader["AwayTeamScore"].ToString();
-                    txtHomeScore.Text = reader["HomeTeamScore"].ToString();
+                    SqlCommand command = new SqlCommand(queryString, connection);
+                    command.Parameters.AddWithValue("@id", GameID);
+                    connection.Open();
 
-                    if ((reader["Winner"] != null) && (reader["Winner"].ToString() != ""))
+                    SqlDataReader reader = command.ExecuteReader();
+                    try
                     {
-                        txtWinner.Text = String.Format("{0} ({1})", reader["Winner"].ToString(), reader["WinnerEmail"].ToString());
-                    }
-                    else
-                    {
-                        txtWinner.Text = "";
+                        reader.Read();
+                        string AwayTeamID = reader["AwayTeamID"].ToString();
+                        string HomeTeamID = reader["HomeTeamID"].ToString();
+                        cbAwayTeam.SelectedValue = reader["AwayTeamID"].ToString();
+                        cbHomeTeam.SelectedValue = reader["HomeTeamID"].ToString();
+                        txtGametime.Text = reader["GameTime"].ToString();
+                        txtAwayScore.Text = reader["AwayTeamScore"].ToString();
+                        txtHomeScore.Text = reader["HomeTeamScore"].ToString();
 
-                        if (txtAwayScore.Text == "" || txtHomeScore.Text == "")
+                        ImageUtility.loadTeamImage(AwayTeamID, imgAwayTeam);
+                        ImageUtility.loadTeamImage(HomeTeamID, imgHomeTeam);
+
+                        if ((reader["Winner"] != null) && (reader["Winner"].ToString() != ""))
                         {
-                            lblWinner.Visible = false;
-                            txtWinner.Visible = false;
+                            txtWinner.Text = String.Format("{0} ({1})", reader["Winner"].ToString(), reader["WinnerEmail"].ToString());
+                        }
+                        else
+                        {
+                            txtWinner.Text = "";
+
+                            if (txtAwayScore.Text == "" || txtHomeScore.Text == "")
+                            {
+                                lblWinner.Visible = false;
+                                txtWinner.Visible = false;
+                            }
                         }
                     }
-                }
-                finally
-                {
-                    // Always call Close when done reading.
-                    reader.Close();
+                    finally
+                    {
+                        // Always call Close when done reading.
+                        reader.Close();
+                    }
                 }
             }
         }
@@ -95,6 +104,7 @@ WHERE Games.ID = @id";
         {
             pnlEditGame.Visible = false;
             gridViewGames.Visible = true;
+            gridViewGames.SelectedIndex = -1;
         }
 
         protected void btnGameSave_Click(object sender, EventArgs e)
@@ -130,6 +140,10 @@ WHERE Games.ID = @id";
 
                 command.ExecuteNonQuery();
             }
+
+            // See if they have provided new images we need to store
+            ImageUtility.StoreNewImage(FileUploadAwayTeam, awayTeamID);
+            ImageUtility.StoreNewImage(FileUploadHomeTeam, homeTeamID);
 
             Response.Redirect("dashboard.aspx");
         }

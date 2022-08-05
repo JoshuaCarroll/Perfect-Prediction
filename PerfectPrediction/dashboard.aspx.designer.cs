@@ -96,6 +96,24 @@ namespace PerfectPrediction
         protected global::AjaxControlToolkit.ComboBox cbHomeTeam;
 
         /// <summary>
+        /// imgHomeTeam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgHomeTeam;
+
+        /// <summary>
+        /// FileUploadHomeTeam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FileUploadHomeTeam;
+
+        /// <summary>
         /// Label3 control.
         /// </summary>
         /// <remarks>
@@ -112,6 +130,24 @@ namespace PerfectPrediction
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.ComboBox cbAwayTeam;
+
+        /// <summary>
+        /// imgAwayTeam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgAwayTeam;
+
+        /// <summary>
+        /// FileUploadAwayTeam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FileUploadAwayTeam;
 
         /// <summary>
         /// Label4 control.
