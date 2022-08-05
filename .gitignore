@@ -398,5 +398,5 @@ FodyWeavers.xsd
 *.sln.iml
 PerfectPrediction/images/team/Thumbs.db
 
-images/team/*
-images/sponsor/*
+PerfectPrediction/images/team/*
+PerfectPrediction/images/sponsor/*
