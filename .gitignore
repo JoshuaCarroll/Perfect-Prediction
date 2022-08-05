@@ -397,3 +397,6 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 PerfectPrediction/images/team/Thumbs.db
+
+images/team/*
+images/sponsor/*
