@@ -5,6 +5,7 @@
     --color2: #ffffff;
     --color3: #cc0106;
     --form-font-size: 22px;
+    --input-width: 200px;
 }
 
 body {
@@ -15,6 +16,11 @@ body {
     margin: 0;
     padding: 0;
     margin-bottom: 20px;
+}
+
+.topMenu {
+    text-align: right;
+
 }
 
 .teams {
@@ -78,9 +84,16 @@ body {
     font-size: var(--form-font-size);
 }
 
-    .form input {
+    .form .label {
+        width: var(--input-width);
+        display: inline-block;
+        text-align: right;
+    }
+
+    .form input[type=text] {
         font-size: var(--form-font-size);
         margin-bottom: 5px;
+        width: var(--input-width);
     }
 
     .form .prediction {
@@ -92,4 +105,13 @@ body {
         color: var(--color2);
         border-style: none;
         font-size: var(--form-font-size);
+    }
+
+.StaticMenuItemStyle {
+    margin-right: 10px;
+
+}
+
+    .StaticMenuItemStyle:nth-of-type(n + 1)::before {
+        content: " | ";
     }
