@@ -27,6 +27,22 @@ namespace PerfectPrediction
             }
         }
 
+        public static bool loadSponsorImage(string tenantID, Image image)
+        {
+            string[] files = Directory.GetFiles(imagesFolder + "/sponsor/", tenantID + ".*");
+            if (files.Length > 0)
+            {
+                image.Visible = true;
+                image.ImageUrl = "~/images/sponsor/" + Path.GetFileName(files[0]);
+                return true;
+            }
+            else
+            {
+                image.Visible = false;
+                return false;
+            }
+        }
+
         public static void StoreNewImage(FileUpload fileUpload, int teamID)
         {
             if (fileUpload.HasFile)
@@ -41,6 +57,24 @@ namespace PerfectPrediction
                 string fileext = Path.GetExtension(fileUpload.FileName);
                 byte[] filedata = fileUpload.FileBytes;
                 string newFilePath = String.Format(imagesFolder + "/team/{0}{1}", teamID, fileext);
+                File.WriteAllBytes(newFilePath, filedata);
+            }
+        }
+
+        public static void StoreNewSponsorImage(FileUpload fileUpload, string tenantID)
+        {
+            if (fileUpload.HasFile)
+            {
+                // Delete any existing image for that team
+                string[] files = Directory.GetFiles(imagesFolder + "/sponsor/", tenantID + ".*");
+                foreach (string file in files)
+                {
+                    File.Delete(file);
+                }
+
+                string fileext = Path.GetExtension(fileUpload.FileName);
+                byte[] filedata = fileUpload.FileBytes;
+                string newFilePath = String.Format(imagesFolder + "/sponsor/{0}{1}", tenantID, fileext);
                 File.WriteAllBytes(newFilePath, filedata);
             }
         }
