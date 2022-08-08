@@ -26,26 +26,22 @@
                 CORRECTLY & WIN!</div>
 			<div class="sponsorLogo"><img src="https://walk-ons.com/assets/img/walkons-logo.svg" /></div>
 			<div class="form">
-				<asp:Label ID="Label1" runat="server" Text="Name"></asp:Label>
-                : 
+				<asp:Label ID="Label1" runat="server" Text="Name" CssClass="label"></asp:Label>: 
                 <asp:TextBox ID="txtName" runat="server" AutoCompleteType="DisplayName"></asp:TextBox>
                 <ajaxToolkit:TextBoxWatermarkExtender ID="txtName_TextBoxWatermarkExtender" runat="server" BehaviorID="txtName_TextBoxWatermarkExtender" TargetControlID="txtName" WatermarkText="name" />
                 <br/>
-				<asp:Label ID="Label2" runat="server" Text="Email"></asp:Label>
-                :&nbsp;
+				<asp:Label ID="Label2" runat="server" Text="Email" CssClass="label"></asp:Label>: 
                 <asp:TextBox ID="txtEmail" runat="server" AutoCompleteType="Email"></asp:TextBox>
                 <ajaxToolkit:TextBoxWatermarkExtender ID="txtEmail_TextBoxWatermarkExtender" runat="server" BehaviorID="txtEmail_TextBoxWatermarkExtender" TargetControlID="txtEmail" WatermarkText="email" />
                 <br/>
 				<div class="prediction">
-					<asp:Label ID="lblHome2" runat="server" Text="Home"></asp:Label>
-                    : 
+					<asp:Label ID="lblHome2" runat="server" Text="Home" CssClass="label"></asp:Label>: 
                     <asp:TextBox ID="txtHomeScore" inputmode="numeric" runat="server" AutoCompleteType="Disabled"></asp:TextBox>
                     <br/>
-					<asp:Label ID="lblAway2" runat="server" Text="Away"></asp:Label>
-                    :&nbsp;
+					<asp:Label ID="lblAway2" runat="server" Text="Away" CssClass="label"></asp:Label>: 
                     <asp:TextBox ID="txtAwayScore" inputmode="numeric" runat="server" AutoCompleteType="Disabled"></asp:TextBox>
 				</div>
-				<input type="checkbox" id="chkTerms"/><label for="chkTerms">I agree to the <asp:HyperLink ID="linkTerms" runat="server">terms and conditions</asp:HyperLink><br/>
+				<input type="checkbox" id="chkTerms"/><label for="chkTerms">I agree to the <asp:HyperLink ID="linkTerms" runat="server">terms and conditions</asp:HyperLink></label><br/>
 				<button>SUBMIT</button>
 			</div>
 		</div>
