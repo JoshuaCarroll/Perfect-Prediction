@@ -6,6 +6,12 @@
     --color3: #cc0106;
     --form-font-size: 22px;
     --input-width: 200px;
+    --max-team-image-size: 150px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -13,24 +19,29 @@ body {
     color: var(--color2);
     font-family: "Arial";
     text-align: center;
-    margin: 0;
-    padding: 0;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .topMenu {
     text-align: right;
+}
 
+#entryWindow {
+    font-size: 0.6em;
+    opacity: 0.7;
 }
 
 .teams {
-    margin-top: 40px;
-    margin-bottom: 25px;
+    margin: 0px;
 }
 
+    .teams svg {
+        height: var(--max-team-image-size);
+    }
+
     .teams img {
-        max-width: 250px;
-        max-height: 250px;
+        max-width: var(--max-team-image-size);
+        max-height: var(--max-team-image-size);
     }
 
 .line1 {
@@ -40,6 +51,7 @@ body {
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 20px;
 }
 
     .line1 span {
@@ -66,6 +78,10 @@ body {
     padding: 5px;
 }
 
+.details {
+    margin-bottom: 10px;
+}
+
 .sponsorLogo {
     margin-left: auto;
     margin-right: auto;
@@ -73,11 +89,12 @@ body {
 
     .sponsorLogo img {
         width: 300px;
-        margin-top: 25px;
-        margin-bottom: 25px;
+        margin-top: 20px;
+        margin-bottom: 0px;
     }
 
-.form {
+.form,
+#pnlThanks {
     background-color: var(--color2);
     color: var(--color1);
     padding: 10px;
@@ -90,7 +107,7 @@ body {
         text-align: right;
     }
 
-    .form input[type=text] {
+    .form input[type="text"] {
         font-size: var(--form-font-size);
         margin-bottom: 5px;
         width: var(--input-width);
@@ -109,7 +126,6 @@ body {
 
 .StaticMenuItemStyle {
     margin-right: 10px;
-
 }
 
     .StaticMenuItemStyle:nth-of-type(n + 1)::before {
