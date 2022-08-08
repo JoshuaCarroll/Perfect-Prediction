@@ -84,22 +84,6 @@ WHERE Games.ID = @id";
             }
         }
 
-        protected void gridViewGames_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName == "New")
-            {
-                cbAwayTeam.SelectedIndex = -1;
-                cbHomeTeam.SelectedIndex = -1;
-                txtGametime.Text = "";
-                txtAwayScore.Text = "";
-                txtHomeScore.Text = "";
-                hdnGameId.Value = "0";
-
-                gridViewGames.Visible = false;
-                pnlEditGame.Visible = true;
-            }
-        }
-
         protected void btnGameCancel_Click(object sender, EventArgs e)
         {
             pnlEditGame.Visible = false;
@@ -173,6 +157,99 @@ WHERE Games.ID = @id";
             }
 
             return newRecordID;
+        }
+
+        protected void linkLogout_Click(object sender, EventArgs e)
+        {
+            Session["TenantID"] = null;
+            Response.Redirect("login.aspx");
+        }
+
+        protected void linkNewGame_Click(object sender, EventArgs e)
+        {
+            cbAwayTeam.SelectedIndex = -1;
+            cbHomeTeam.SelectedIndex = -1;
+            txtGametime.Text = "";
+            txtAwayScore.Text = "";
+            txtHomeScore.Text = "";
+            hdnGameId.Value = "0";
+
+            gridViewGames.Visible = false;
+            pnlEditGame.Visible = true;
+        }
+
+        protected void linkSettings_Click(object sender, EventArgs e)
+        {
+            if (Session["TenantID"] == null)
+            {
+                Response.Redirect("login.aspx");
+            }
+            string strTenantId = Session["TenantID"].ToString();
+
+            gridViewGames.Visible = false;
+            pnlSettings.Visible = true;
+
+            // Load current values
+            string queryString = @"SELECT Username, Password, Name, Email from Tenants where ID = @Id";
+
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@id", strTenantId);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+                try
+                {
+                    reader.Read();
+                    txtUsername.Text = reader["Username"].ToString();
+                    txtPassword.Text = reader["Password"].ToString();
+                    txtName.Text = reader["Name"].ToString();
+                    txtEmail.Text = reader["Email"].ToString();
+
+                    ImageUtility.loadSponsorImage(strTenantId, imgSponsor);
+                }
+                finally
+                {
+                    // Always call Close when done reading.
+                    reader.Close();
+                }
+            }
+        }
+
+        protected void btnCancelSettings_Click(object sender, EventArgs e)
+        {
+            gridViewGames.Visible = true;
+            pnlSettings.Visible = false;
+        }
+
+        protected void btnSaveSettings_Click(object sender, EventArgs e)
+        {
+            if (Session["TenantID"] == null)
+            {
+                Response.Redirect("login.aspx");
+            }
+            string strTenantId = Session["TenantID"].ToString();
+
+            string queryString = @"Update Tenants set Password = @password, Name = @name, Email = @email where ID = @id";
+
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                command.Parameters.AddWithValue("@password", txtPassword.Text);
+                command.Parameters.AddWithValue("@name", txtName.Text);
+                command.Parameters.AddWithValue("@email", txtEmail.Text);
+                command.Parameters.AddWithValue("@id", Session["TenantID"].ToString());
+                connection.Open();
+
+                command.ExecuteNonQuery();
+            }
+
+            // See if they have provided new images we need to store
+            ImageUtility.StoreNewSponsorImage(FileUploadSponsor, strTenantId);
+
+            Response.Redirect("dashboard.aspx");
         }
     }
 }

@@ -21,7 +21,13 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:GridView ID="gridViewGames" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="sqlDataSourceGames" ForeColor="#333333" GridLines="None" Width="1310px" OnSelectedIndexChanged="gridViewGames_SelectedIndexChanged" BorderColor="#003366" BorderStyle="Solid" DataKeyNames="ID" OnRowCommand="gridViewGames_RowCommand">
+        <asp:LinkButton ID="linkNewGame" runat="server" OnClick="linkNewGame_Click">New game</asp:LinkButton>
+&nbsp;|
+        <asp:LinkButton ID="linkSettings" runat="server" OnClick="linkSettings_Click">Settings</asp:LinkButton>
+&nbsp;|
+        <asp:LinkButton ID="linkLogout" runat="server" OnClick="linkLogout_Click">Logout</asp:LinkButton>
+        <br />
+        <asp:GridView ID="gridViewGames" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="sqlDataSourceGames" ForeColor="#333333" GridLines="None" Width="1310px" OnSelectedIndexChanged="gridViewGames_SelectedIndexChanged" BorderColor="#003366" BorderStyle="Solid" DataKeyNames="ID">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
                 <asp:CommandField SelectText="Edit" ShowSelectButton="True"></asp:CommandField>
@@ -105,6 +111,8 @@ ORDER BY [GameTime]" UpdateCommand="UPDATE [Games] SET [HomeTeamID] = @HomeTeamI
             </UpdateParameters>
         </asp:SqlDataSource>
         <asp:Panel ID="pnlEditGame" runat="server" Visible="False">
+            <asp:Label ID="Label6" runat="server" Text="Edit Game"></asp:Label>
+            <br />
             <asp:Label CssClass="label" ID="Label1" runat="server" Text="Game date/time"></asp:Label>
             <asp:TextBox ID="txtGametime" runat="server"></asp:TextBox>
             <br />
@@ -133,6 +141,34 @@ ORDER BY [GameTime]" UpdateCommand="UPDATE [Games] SET [HomeTeamID] = @HomeTeamI
             <asp:Button ID="btnGameSave" runat="server" Text="Save" OnClick="btnGameSave_Click" />
             <asp:Button ID="btnGameCancel" runat="server" OnClick="btnGameCancel_Click" Text="Cancel" />
             <asp:HiddenField ID="hdnGameId" runat="server" />
+        </asp:Panel>
+        <asp:Panel ID="pnlSettings" runat="server" Visible="False">
+            <h1>Settings</h1>
+            
+            
+            <asp:Label ID="Label7" runat="server" Text="Username"></asp:Label>
+            <asp:TextBox ID="txtUsername" runat="server" Enabled="False"></asp:TextBox><br />
+            <asp:Label ID="Label8" runat="server" Text="Password"></asp:Label>
+            <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox>
+            
+            
+            <br />
+            <asp:Label ID="Label9" runat="server" Text="Name"></asp:Label>
+            <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+            <br />
+            <asp:Label ID="lblEmail" runat="server" Text="Email"></asp:Label>
+            <asp:TextBox ID="txtEmail" runat="server" TextMode="Email"></asp:TextBox>
+            <br />
+            <asp:Label ID="Label10" runat="server" Text="Sponsor Logo"></asp:Label>
+            <asp:Image ID="imgSponsor" runat="server" />
+            <asp:FileUpload ID="FileUploadSponsor" runat="server" />
+            <br />
+            <br />
+            <asp:Button ID="btnSaveSettings" runat="server" OnClick="btnSaveSettings_Click" Text="Save" />
+            <asp:Button ID="btnCancelSettings" runat="server" OnClick="btnCancelSettings_Click" Text="Cancel" />
+            <br />
+            
+            
         </asp:Panel>
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
