@@ -79,6 +79,7 @@
     <Content Include="default.aspx" />
     <Content Include="login.aspx" />
     <Content Include="StyleSheet.css" />
+    <Content Include="StyleSheetDashboard.css" />
     <Content Include="terms.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>

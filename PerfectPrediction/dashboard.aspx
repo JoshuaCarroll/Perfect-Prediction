@@ -11,11 +11,10 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:LinkButton ID="linkNewGame" runat="server" OnClick="linkNewGame_Click">New game</asp:LinkButton>
-&nbsp;|
-        <asp:LinkButton ID="linkSettings" runat="server" OnClick="linkSettings_Click">Settings</asp:LinkButton>
-&nbsp;|
-        <asp:LinkButton ID="linkLogout" runat="server" OnClick="linkLogout_Click">Logout</asp:LinkButton>
+        <asp:LinkButton ID="linkNewGame" runat="server" OnClick="linkNewGame_Click">New game</asp:LinkButton> | 
+        <asp:LinkButton ID="linkSettings" runat="server" OnClick="linkSettings_Click">Settings</asp:LinkButton> | 
+        <asp:LinkButton ID="linkLogout" runat="server" OnClick="linkLogout_Click">Logout</asp:LinkButton> | 
+        <a href="https://github.com/JoshuaCarroll/Perfect-Prediction/issues" target="_blank">Report a problem or idea</a>
         <br />
         <asp:GridView ID="gridViewGames" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="sqlDataSourceGames" ForeColor="#333333" GridLines="None" Width="1684px" OnSelectedIndexChanged="gridViewGames_SelectedIndexChanged" BorderColor="#003366" BorderStyle="Solid" DataKeyNames="ID">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
