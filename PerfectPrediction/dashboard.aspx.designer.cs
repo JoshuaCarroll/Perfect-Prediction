@@ -87,15 +87,6 @@ namespace PerfectPrediction
         protected global::System.Web.UI.WebControls.Panel pnlEditGame;
 
         /// <summary>
-        /// Label6 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label6;
-
-        /// <summary>
         /// Label1 control.
         /// </summary>
         /// <remarks>
@@ -265,6 +256,24 @@ namespace PerfectPrediction
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnGameId;
+
+        /// <summary>
+        /// gridviewEntries control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gridviewEntries;
+
+        /// <summary>
+        /// SqlDataSourceEntries control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceEntries;
 
         /// <summary>
         /// pnlSettings control.

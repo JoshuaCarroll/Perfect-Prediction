@@ -27,22 +27,17 @@
 &nbsp;|
         <asp:LinkButton ID="linkLogout" runat="server" OnClick="linkLogout_Click">Logout</asp:LinkButton>
         <br />
-        <asp:GridView ID="gridViewGames" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="sqlDataSourceGames" ForeColor="#333333" GridLines="None" Width="1310px" OnSelectedIndexChanged="gridViewGames_SelectedIndexChanged" BorderColor="#003366" BorderStyle="Solid" DataKeyNames="ID">
+        <asp:GridView ID="gridViewGames" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="sqlDataSourceGames" ForeColor="#333333" GridLines="None" Width="1378px" OnSelectedIndexChanged="gridViewGames_SelectedIndexChanged" BorderColor="#003366" BorderStyle="Solid" DataKeyNames="ID">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
-                <asp:CommandField SelectText="Edit" ShowSelectButton="True"></asp:CommandField>
-                <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" SortExpression="ID" Visible="False" InsertVisible="False" />
-                <asp:BoundField DataField="AwayTeam" HeaderText="Away" SortExpression="AwayTeam" >
-                    <HeaderStyle HorizontalAlign="Left" />
+                <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" SortExpression="ID" InsertVisible="False" />
+                <asp:BoundField DataField="AwayTeam" HeaderText="AwayTeam" SortExpression="AwayTeam" >
                 </asp:BoundField>
-                <asp:BoundField DataField="HomeTeam" HeaderText="Home" SortExpression="HomeTeam" >
-                    <HeaderStyle HorizontalAlign="Left" />
+                <asp:BoundField DataField="HomeTeam" HeaderText="HomeTeam" SortExpression="HomeTeam" >
                 </asp:BoundField>
-                <asp:BoundField DataField="GameTime" HeaderText="Date/Time" SortExpression="GameTime" >
-                    <HeaderStyle HorizontalAlign="Left" />
+                <asp:BoundField DataField="GameTime" HeaderText="GameTime" SortExpression="GameTime" >
                 </asp:BoundField>
-                <asp:BoundField DataField="Name" HeaderText="Winner" SortExpression="Name">
-                    <HeaderStyle HorizontalAlign="Left" />
+                <asp:BoundField DataField="Winner" HeaderText="Winner" SortExpression="Winner" ReadOnly="True">
                 </asp:BoundField>
             </Columns>
             <EditRowStyle BackColor="#999999" />
@@ -56,7 +51,7 @@
             <SortedDescendingCellStyle BackColor="#FFFDF8" />
             <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
-        <asp:SqlDataSource ID="sqlDataSourceGames" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [Games] WHERE [Id] = @original_Id AND [HomeTeamID] = @original_HomeTeamID AND [AwayTeamID] = @original_AwayTeamID AND [GameTime] = @original_GameTime AND [TenantID] = @original_TenantID AND (([WinningPredictionID] = @original_WinningPredictionID) OR ([WinningPredictionID] IS NULL AND @original_WinningPredictionID IS NULL))" InsertCommand="INSERT INTO [Games] ([Id], [HomeTeamID], [AwayTeamID], [GameTime], [TenantID], [WinningPredictionID]) VALUES (@Id, @HomeTeamID, @AwayTeamID, @GameTime, @TenantID, @WinningPredictionID)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT Games.ID, TeamsAway.Name [AwayTeam], TeamsHome.Name [HomeTeam], GameTime, Predictions.Name FROM [Games] 
+        <asp:SqlDataSource ID="sqlDataSourceGames" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [Games] WHERE [Id] = @original_Id AND [HomeTeamID] = @original_HomeTeamID AND [AwayTeamID] = @original_AwayTeamID AND [GameTime] = @original_GameTime AND [TenantID] = @original_TenantID AND (([WinningPredictionID] = @original_WinningPredictionID) OR ([WinningPredictionID] IS NULL AND @original_WinningPredictionID IS NULL))" InsertCommand="INSERT INTO [Games] ([Id], [HomeTeamID], [AwayTeamID], [GameTime], [TenantID], [WinningPredictionID]) VALUES (@Id, @HomeTeamID, @AwayTeamID, @GameTime, @TenantID, @WinningPredictionID)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT Games.ID, TeamsAway.Name [AwayTeam], TeamsHome.Name [HomeTeam], GameTime, CONCAT(Predictions.Name, '   ', Predictions.Email) [Winner] FROM [Games] 
 INNER JOIN Teams [TeamsAway] on TeamsAway.Id = Games.AwayTeamID 
 INNER JOIN Teams [TeamsHome] on TeamsHome.Id = Games.HomeTeamID
 LEFT JOIN Predictions on Predictions.Id = Games.WinningPredictionID 
@@ -111,7 +106,7 @@ ORDER BY [GameTime]" UpdateCommand="UPDATE [Games] SET [HomeTeamID] = @HomeTeamI
             </UpdateParameters>
         </asp:SqlDataSource>
         <asp:Panel ID="pnlEditGame" runat="server" Visible="False">
-            <asp:Label ID="Label6" runat="server" Text="Edit Game"></asp:Label>
+            <h2>Edit Game</h2>
             <br />
             <asp:Label CssClass="label" ID="Label1" runat="server" Text="Game date/time"></asp:Label>
             <asp:TextBox ID="txtGametime" runat="server"></asp:TextBox>
@@ -141,9 +136,34 @@ ORDER BY [GameTime]" UpdateCommand="UPDATE [Games] SET [HomeTeamID] = @HomeTeamI
             <asp:Button ID="btnGameSave" runat="server" Text="Save" OnClick="btnGameSave_Click" />
             <asp:Button ID="btnGameCancel" runat="server" OnClick="btnGameCancel_Click" Text="Cancel" />
             <asp:HiddenField ID="hdnGameId" runat="server" />
+            <br />
+            <h3>Entries</h3><asp:GridView ID="gridviewEntries" runat="server" AllowSorting="True" CellPadding="4" DataSourceID="SqlDataSourceEntries" ForeColor="#333333" GridLines="None" Width="1414px" AutoGenerateColumns="False">
+            <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+            <Columns>
+                <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
+                <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
+                <asp:BoundField DataField="HomeScore" HeaderText="HomeScore" SortExpression="HomeScore" />
+                <asp:BoundField DataField="AwayScore" HeaderText="AwayScore" SortExpression="AwayScore" />
+            </Columns>
+            <EditRowStyle BackColor="#999999" />
+            <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+            <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+            <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+            <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+            <SortedAscendingCellStyle BackColor="#E9E7E2" />
+            <SortedAscendingHeaderStyle BackColor="#506C8C" />
+            <SortedDescendingCellStyle BackColor="#FFFDF8" />
+            <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+            </asp:GridView>
+            <asp:SqlDataSource ID="SqlDataSourceEntries" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [Name], [Email], [HomeScore], [AwayScore] FROM [Predictions] WHERE ([GameID] = @GameID) ORDER BY [Id]">
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="gridViewGames" Name="GameID" PropertyName="SelectedValue" Type="Int32" />
+                </SelectParameters>
+            </asp:SqlDataSource>
         </asp:Panel>
         <asp:Panel ID="pnlSettings" runat="server" Visible="False">
-            <h1>Settings</h1>
+            <h2>Settings</h2>
             
             
             <asp:Label ID="Label7" runat="server" Text="Username"></asp:Label>
