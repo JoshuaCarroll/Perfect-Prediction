@@ -1,0 +1,13 @@
+﻿body {
+}
+
+
+label, .label {
+    width: 200px;
+    text-align: right;
+}
+
+.teamImage {
+    max-height: 100px;
+    max-width: 100px;
+}
