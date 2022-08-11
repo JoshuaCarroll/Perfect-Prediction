@@ -258,6 +258,15 @@ namespace PerfectPrediction
         protected global::System.Web.UI.WebControls.HiddenField hdnGameId;
 
         /// <summary>
+        /// lblEntries control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEntries;
+
+        /// <summary>
         /// gridviewEntries control.
         /// </summary>
         /// <remarks>

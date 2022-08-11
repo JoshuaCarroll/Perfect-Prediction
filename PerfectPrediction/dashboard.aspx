@@ -128,7 +128,7 @@ ORDER BY [GameTime]" UpdateCommand="UPDATE [Games] SET [HomeTeamID] = @HomeTeamI
             <asp:Button ID="btnGameCancel" runat="server" OnClick="btnGameCancel_Click" Text="Cancel" />
             <asp:HiddenField ID="hdnGameId" runat="server" />
             <br />
-            <h3>Entries</h3><asp:GridView ID="gridviewEntries" runat="server" AllowSorting="True" CellPadding="4" DataSourceID="SqlDataSourceEntries" ForeColor="#333333" GridLines="None" Width="1414px" AutoGenerateColumns="False">
+            <h3><asp:Label ID="lblEntries" runat="server" Text="Entries"></asp:Label></h3><asp:GridView ID="gridviewEntries" runat="server" AllowSorting="True" CellPadding="4" DataSourceID="SqlDataSourceEntries" ForeColor="#333333" GridLines="None" Width="1414px" AutoGenerateColumns="False">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
                 <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />

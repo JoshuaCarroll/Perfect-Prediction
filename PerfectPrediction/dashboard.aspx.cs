@@ -81,6 +81,18 @@ WHERE Games.ID = @id";
                         reader.Close();
                     }
                 }
+
+                queryString = @"Select Count(ID) from Predictions where GameID = @id";
+
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+                {
+                    SqlCommand command = new SqlCommand(queryString, connection);
+                    command.Parameters.AddWithValue("@id", GameID);
+                    connection.Open();
+
+                    int entryCount = (int)command.ExecuteScalar();
+                    lblEntries.Text = entryCount.ToString() + " Entries";
+                }
             }
         }
 
