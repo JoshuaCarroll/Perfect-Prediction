@@ -36,7 +36,7 @@ namespace PerfectPrediction
 
             if (ex is HttpException && ex.InnerException is System.Web.UI.ViewStateException)
             {
-                HttpContext.Current.Response.Redirect("/");
+                HttpContext.Current.Response.Redirect("/login.aspx");
                 return;
             }
         }
