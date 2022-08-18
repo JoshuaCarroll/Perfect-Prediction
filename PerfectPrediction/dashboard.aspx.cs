@@ -53,7 +53,47 @@ WHERE Games.ID = @id";
                         string HomeTeamID = reader["HomeTeamID"].ToString();
                         cbAwayTeam.SelectedValue = reader["AwayTeamID"].ToString();
                         cbHomeTeam.SelectedValue = reader["HomeTeamID"].ToString();
-                        txtGametime.Text = reader["GameTime"].ToString();
+
+                        try
+                        {
+                            DateTime dtGame = DateTime.Parse(reader["GameTime"].ToString());
+                            txtGameDate.Text = dtGame.ToShortDateString();
+
+                            if (dtGame.Hour > 12)
+                            {
+                                ddlGameTimeHour.SelectedValue = (dtGame.Hour - 12).ToString();
+                                ddlGameTimeAP.SelectedValue = "PM";
+                            }
+                            else
+                            {
+                                if (dtGame.Hour == 0)
+                                {
+                                    ddlGameTimeHour.SelectedValue = "12";
+                                }
+                                else
+                                {
+                                    ddlGameTimeHour.SelectedValue = dtGame.Hour.ToString();
+                                }
+
+                                ddlGameTimeAP.SelectedValue = "AM";
+                            }
+
+                            try
+                            {
+                                ddlGameTimeMinute.SelectedValue = dtGame.Minute.ToString();
+                            }
+                            catch
+                            {
+                                ddlGameTimeMinute.SelectedValue = "00";
+                            }
+                        }
+                        catch
+                        {
+                            txtGameDate.Text = "";
+                            ddlGameTimeHour.SelectedValue = "7";
+                            ddlGameTimeMinute.SelectedValue = "00";
+                            ddlGameTimeAP.SelectedValue = "PM";
+                        }
                         txtAwayScore.Text = reader["AwayTeamScore"].ToString();
                         txtHomeScore.Text = reader["HomeTeamScore"].ToString();
 
@@ -127,7 +167,9 @@ WHERE Games.ID = @id";
 
                 command.Parameters.AddWithValue("@HomeTeamID", homeTeamID);
                 command.Parameters.AddWithValue("@AwayTeamID", awayTeamID);
-                command.Parameters.AddWithValue("@GameTime", txtGametime.Text);
+
+                string strGameDateTime = string.Format("{0} {1}:{2} {3}", txtGameDate.Text, ddlGameTimeHour.Text, ddlGameTimeMinute.Text, ddlGameTimeAP.Text);
+                command.Parameters.AddWithValue("@GameTime", strGameDateTime);
                 command.Parameters.AddWithValue("@HomeTeamScore", txtHomeScore.Text);
                 command.Parameters.AddWithValue("@AwayTeamScore", txtAwayScore.Text);
                 command.Parameters.AddWithValue("@GameID", hdnGameId.Value);
@@ -181,7 +223,10 @@ WHERE Games.ID = @id";
         {
             cbAwayTeam.SelectedIndex = -1;
             cbHomeTeam.SelectedIndex = -1;
-            txtGametime.Text = "";
+            txtGameDate.Text = "";
+            ddlGameTimeHour.SelectedValue = "7";
+            ddlGameTimeMinute.SelectedValue = "00";
+            ddlGameTimeAP.SelectedValue = "PM";
             txtAwayScore.Text = "";
             txtHomeScore.Text = "";
             hdnGameId.Value = "0";

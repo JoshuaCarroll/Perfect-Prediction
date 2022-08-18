@@ -99,8 +99,36 @@ ORDER BY [GameTime]" UpdateCommand="UPDATE [Games] SET [HomeTeamID] = @HomeTeamI
         <asp:Panel ID="pnlEditGame" runat="server" Visible="False">
             <h2>Edit Game</h2>
             <br />
-            <asp:Label CssClass="label" ID="Label1" runat="server" Text="Game date/time"></asp:Label>
-            <asp:TextBox ID="txtGametime" runat="server"></asp:TextBox>
+            <asp:Label CssClass="label" ID="Label1" runat="server" Text="Game date"></asp:Label>
+            <asp:TextBox ID="txtGameDate" runat="server" ReadOnly="True"></asp:TextBox>
+            <ajaxToolkit:CalendarExtender ID="txtGameDate_CalendarExtender" runat="server" BehaviorID="txtGametime_CalendarExtender" PopupButtonID="btnCalendarSelect" TargetControlID="txtGameDate" />
+            &nbsp;<asp:Button ID="btnCalendarSelect" runat="server" Text="Select" />
+            <br />
+            <asp:Label ID="lblGameTime" runat="server" Text="Game time"></asp:Label>
+            <asp:DropDownList ID="ddlGameTimeHour" runat="server">
+                <asp:ListItem Value="1">1</asp:ListItem>
+                <asp:ListItem Value="2">2</asp:ListItem>
+                <asp:ListItem Value="3">3</asp:ListItem>
+                <asp:ListItem Value="4">4</asp:ListItem>
+                <asp:ListItem Value="5">5</asp:ListItem>
+                <asp:ListItem Value="6">6</asp:ListItem>
+                <asp:ListItem Selected="True" Value="7">7</asp:ListItem>
+                <asp:ListItem Value="8">8</asp:ListItem>
+                <asp:ListItem Value="9">9</asp:ListItem>
+                <asp:ListItem Value="10">10</asp:ListItem>
+                <asp:ListItem>11</asp:ListItem>
+                <asp:ListItem>12</asp:ListItem>
+            </asp:DropDownList>
+            :<asp:DropDownList ID="ddlGameTimeMinute" runat="server">
+                <asp:ListItem Selected="True">00</asp:ListItem>
+                <asp:ListItem>15</asp:ListItem>
+                <asp:ListItem>30</asp:ListItem>
+                <asp:ListItem>45</asp:ListItem>
+            </asp:DropDownList>
+            &nbsp;<asp:DropDownList ID="ddlGameTimeAP" runat="server">
+                <asp:ListItem>AM</asp:ListItem>
+                <asp:ListItem Selected="True">PM</asp:ListItem>
+            </asp:DropDownList>
             <br />
             <asp:Label CssClass="label" ID="Label2" runat="server" Text="Home team"></asp:Label>
             <ajaxToolkit:ComboBox ID="cbHomeTeam" runat="server" DataSourceID="sqlDataSourceTeams" DataTextField="Name" DataValueField="Id" MaxLength="0" OnItemInserting="comboboxTeam_ItemInserting" style="display: inline;">

@@ -96,13 +96,67 @@ namespace PerfectPrediction
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// txtGametime control.
+        /// txtGameDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtGametime;
+        protected global::System.Web.UI.WebControls.TextBox txtGameDate;
+
+        /// <summary>
+        /// txtGameDate_CalendarExtender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender txtGameDate_CalendarExtender;
+
+        /// <summary>
+        /// btnCalendarSelect control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCalendarSelect;
+
+        /// <summary>
+        /// lblGameTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblGameTime;
+
+        /// <summary>
+        /// ddlGameTimeHour control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlGameTimeHour;
+
+        /// <summary>
+        /// ddlGameTimeMinute control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlGameTimeMinute;
+
+        /// <summary>
+        /// ddlGameTimeAP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlGameTimeAP;
 
         /// <summary>
         /// Label2 control.
