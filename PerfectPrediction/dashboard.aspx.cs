@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
+using System.Globalization;
 
 namespace PerfectPrediction
 {
@@ -54,10 +55,10 @@ WHERE Games.ID = @id";
                         cbAwayTeam.SelectedValue = reader["AwayTeamID"].ToString();
                         cbHomeTeam.SelectedValue = reader["HomeTeamID"].ToString();
 
-                        try
-                        {
+                        //try
+                        //{
                             DateTime dtGame = DateTime.Parse(reader["GameTime"].ToString());
-                            txtGameDate.Text = dtGame.ToShortDateString();
+                        txtGameDate.Text = dtGame.ToString("d", CultureInfo.GetCultureInfo("en-US"));
 
                             if (dtGame.Hour > 12)
                             {
@@ -86,14 +87,14 @@ WHERE Games.ID = @id";
                             {
                                 ddlGameTimeMinute.SelectedValue = "00";
                             }
-                        }
-                        catch
-                        {
-                            txtGameDate.Text = "";
-                            ddlGameTimeHour.SelectedValue = "7";
-                            ddlGameTimeMinute.SelectedValue = "00";
-                            ddlGameTimeAP.SelectedValue = "PM";
-                        }
+                        //}
+                        //catch
+                        //{
+                        //    txtGameDate.Text = "";
+                        //    ddlGameTimeHour.SelectedValue = "7";
+                        //    ddlGameTimeMinute.SelectedValue = "00";
+                        //    ddlGameTimeAP.SelectedValue = "PM";
+                        //}
                         txtAwayScore.Text = reader["AwayTeamScore"].ToString();
                         txtHomeScore.Text = reader["HomeTeamScore"].ToString();
 
@@ -168,7 +169,7 @@ WHERE Games.ID = @id";
                 command.Parameters.AddWithValue("@HomeTeamID", homeTeamID);
                 command.Parameters.AddWithValue("@AwayTeamID", awayTeamID);
 
-                DateTime dtGame = DateTime.Parse(txtGameDate.Text);
+                DateTime dtGame = DateTime.ParseExact(txtGameDate.Text, "d", CultureInfo.GetCultureInfo("en-US"));
                 int hour = int.Parse(ddlGameTimeHour.Text);
                 if (ddlGameTimeAP.Text == "PM")
                 {

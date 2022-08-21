@@ -1,11 +1,12 @@
-﻿body {
-}
-
-
-label, .label {
-    width: 200px;
+﻿.label {
+    width: 100px;
+    display: inline-block;
     text-align: right;
 }
+
+    .label:after {
+        content: ": ";
+    }
 
 .teamImage {
     max-height: 100px;
@@ -15,4 +16,7 @@ label, .label {
 .qrcode {
     max-height: 100px;
     max-width: 100px;
+}
+.gridViewGames {
+    max-width: 95%;
 }
