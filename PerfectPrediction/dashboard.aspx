@@ -20,14 +20,20 @@
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
                 <asp:CommandField ShowSelectButton="True" />
-                <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" SortExpression="ID" InsertVisible="False" />
+                <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" SortExpression="ID" InsertVisible="False" >
+                <HeaderStyle HorizontalAlign="Left" />
+                </asp:BoundField>
                 <asp:BoundField DataField="AwayTeam" HeaderText="AwayTeam" SortExpression="AwayTeam" >
+                <HeaderStyle HorizontalAlign="Left" />
                 </asp:BoundField>
                 <asp:BoundField DataField="HomeTeam" HeaderText="HomeTeam" SortExpression="HomeTeam" >
+                <HeaderStyle HorizontalAlign="Left" />
                 </asp:BoundField>
-                <asp:BoundField DataField="GameTime" HeaderText="GameTime" SortExpression="GameTime" >
+                <asp:BoundField DataField="GameTime" HeaderText="Game Time" SortExpression="GameTime" DataFormatString="{0:g}" >
+                <HeaderStyle HorizontalAlign="Left" />
                 </asp:BoundField>
                 <asp:BoundField DataField="Winner" HeaderText="Winner" SortExpression="Winner" ReadOnly="True">
+                <HeaderStyle HorizontalAlign="Left" />
                 </asp:BoundField>
                 <asp:BoundField DataField="QR Code" HeaderText="QR Code" HtmlEncode="False" HtmlEncodeFormatString="False" ReadOnly="True" SortExpression="QR Code" />
             </Columns>
@@ -42,7 +48,7 @@
             <SortedDescendingCellStyle BackColor="#FFFDF8" />
             <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
-        <asp:SqlDataSource ID="sqlDataSourceGames" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [Games] WHERE [Id] = @original_Id AND [HomeTeamID] = @original_HomeTeamID AND [AwayTeamID] = @original_AwayTeamID AND [GameTime] = @original_GameTime AND [TenantID] = @original_TenantID AND (([WinningPredictionID] = @original_WinningPredictionID) OR ([WinningPredictionID] IS NULL AND @original_WinningPredictionID IS NULL))" InsertCommand="INSERT INTO [Games] ([Id], [HomeTeamID], [AwayTeamID], [GameTime], [TenantID], [WinningPredictionID]) VALUES (@Id, @HomeTeamID, @AwayTeamID, @GameTime, @TenantID, @WinningPredictionID)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT Games.ID, TeamsAway.Name [AwayTeam], TeamsHome.Name [HomeTeam], GameTime, CONCAT(Predictions.Name, '   ', Predictions.Email) [Winner], CONCAT('&lt;img src=&quot;https://api.qrserver.com/v1/create-qr-code/?data=https://perfectprediction.aa5jc.com/?g=', Games.ID, '&amp;size=200x200&quot;/&gt;') [QR Code] FROM [Games] 
+        <asp:SqlDataSource ID="sqlDataSourceGames" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [Games] WHERE [Id] = @original_Id AND [HomeTeamID] = @original_HomeTeamID AND [AwayTeamID] = @original_AwayTeamID AND [GameTime] = @original_GameTime AND [TenantID] = @original_TenantID AND (([WinningPredictionID] = @original_WinningPredictionID) OR ([WinningPredictionID] IS NULL AND @original_WinningPredictionID IS NULL))" InsertCommand="INSERT INTO [Games] ([Id], [HomeTeamID], [AwayTeamID], [GameTime], [TenantID], [WinningPredictionID]) VALUES (@Id, @HomeTeamID, @AwayTeamID, @GameTime, @TenantID, @WinningPredictionID)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT Games.ID, TeamsAway.Name [AwayTeam], TeamsHome.Name [HomeTeam], GameTime, CONCAT(Predictions.Name, '   ', Predictions.Email) [Winner], CONCAT('&lt;a target=&quot;_blank&quot; href=&quot;https://api.qrserver.com/v1/create-qr-code/?data=https://perfectprediction.aa5jc.com/?g=', Games.ID,'&quot;&gt;&lt;img class=&quot;qrcode&quot; src=&quot;https://api.qrserver.com/v1/create-qr-code/?data=https://perfectprediction.aa5jc.com/?g=', Games.ID, '&amp;size=200x200&quot;/&gt;&lt;/a&gt;') [QR Code] FROM [Games] 
 INNER JOIN Teams [TeamsAway] on TeamsAway.Id = Games.AwayTeamID 
 INNER JOIN Teams [TeamsHome] on TeamsHome.Id = Games.HomeTeamID
 LEFT JOIN Predictions on Predictions.Id = Games.WinningPredictionID 
@@ -100,7 +106,7 @@ ORDER BY [GameTime]" UpdateCommand="UPDATE [Games] SET [HomeTeamID] = @HomeTeamI
             <h2>Edit Game</h2>
             <br />
             <asp:Label CssClass="label" ID="Label1" runat="server" Text="Game date"></asp:Label>
-            <asp:TextBox ID="txtGameDate" runat="server" ReadOnly="True"></asp:TextBox>
+            <asp:TextBox ID="txtGameDate" runat="server"></asp:TextBox>
             <ajaxToolkit:CalendarExtender ID="txtGameDate_CalendarExtender" runat="server" BehaviorID="txtGametime_CalendarExtender" PopupButtonID="btnCalendarSelect" TargetControlID="txtGameDate" />
             &nbsp;<asp:Button ID="btnCalendarSelect" runat="server" Text="Select" />
             <br />

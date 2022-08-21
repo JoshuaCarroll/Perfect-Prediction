@@ -11,3 +11,8 @@ label, .label {
     max-height: 100px;
     max-width: 100px;
 }
+
+.qrcode {
+    max-height: 100px;
+    max-width: 100px;
+}

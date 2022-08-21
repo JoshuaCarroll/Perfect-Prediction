@@ -168,8 +168,16 @@ WHERE Games.ID = @id";
                 command.Parameters.AddWithValue("@HomeTeamID", homeTeamID);
                 command.Parameters.AddWithValue("@AwayTeamID", awayTeamID);
 
-                string strGameDateTime = string.Format("{0} {1}:{2} {3}", txtGameDate.Text, ddlGameTimeHour.Text, ddlGameTimeMinute.Text, ddlGameTimeAP.Text);
-                command.Parameters.AddWithValue("@GameTime", strGameDateTime);
+                DateTime dtGame = DateTime.Parse(txtGameDate.Text);
+                int hour = int.Parse(ddlGameTimeHour.Text);
+                if (ddlGameTimeAP.Text == "PM")
+                {
+                    hour = hour + 12;
+                }
+                TimeSpan tsGame = new TimeSpan(hour, int.Parse(ddlGameTimeMinute.Text), 0);
+                dtGame = dtGame.Add(tsGame);
+
+                command.Parameters.AddWithValue("@GameTime", dtGame);
                 command.Parameters.AddWithValue("@HomeTeamScore", txtHomeScore.Text);
                 command.Parameters.AddWithValue("@AwayTeamScore", txtAwayScore.Text);
                 command.Parameters.AddWithValue("@GameID", hdnGameId.Value);
