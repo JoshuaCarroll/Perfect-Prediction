@@ -19,7 +19,8 @@
 			<div class="line3">PREDICT THE FINAL SCORE 
                 <br />
                 CORRECTLY & WIN!</div>
-			<div class="sponsorLogo"><asp:Image ID="imgSponsor" runat="server" /></div>
+			<div class="sponsorLogo">
+                <asp:HyperLink ID="linkSponsor" runat="server"><asp:Image ID="imgSponsor" runat="server" /></asp:HyperLink></div>
 
 			<div class="teams">
 				<asp:Label ID="lblHome" runat="server"></asp:Label><asp:Image ID="imgHome" runat="server" /><svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='150px' width='35px'><text x='5' y='85' fill='white' opacity="0.5" font-size='20'>VS</text></svg><asp:Image ID="imgAway" runat="server" /><asp:Label ID="lblAway" runat="server"></asp:Label>

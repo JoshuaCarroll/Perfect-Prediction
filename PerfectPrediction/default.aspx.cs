@@ -27,11 +27,12 @@ namespace PerfectPrediction
                 int.TryParse(gameId.ToString(), out intGameId);
             }
 
-            string sql = @"SELECT Games.HomeTeamID [HomeTeamID], Games.AwayTeamID [AwayTeamID],  Games.GameTime [GameTime], Games.TenantID [TenantID],
-	HomeTeam.Name [HomeTeamName], AwayTeam.Name [AwayTeamName]
+            string sql = @"SELECT Games.HomeTeamID [HomeTeamID], Games.AwayTeamID [AwayTeamID], Games.GameTime [GameTime], Games.TenantID [TenantID],
+	HomeTeam.Name [HomeTeamName], AwayTeam.Name [AwayTeamName], Tenants.SponsorUrl
 FROM Games
 INNER JOIN Teams [HomeTeam] on Games.HomeTeamID = HomeTeam.ID
 INNER JOIN Teams [AwayTeam] on Games.AwayTeamID = AwayTeam.ID
+INNER JOIN Tenants on Games.TenantID = Tenants.ID
 Where Games.ID = @id";
 
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
@@ -54,6 +55,17 @@ Where Games.ID = @id";
                     if (ImageUtility.loadTeamImage(HomeTeamID, imgHome))
                     {
                         lblHome.Visible = false;
+                    }
+
+                    string sponsorUrl = reader["SponsorUrl"].ToString();
+                    if (sponsorUrl != null && sponsorUrl != string.Empty)
+                    {
+                        linkSponsor.Target = "_blank";
+                        if (!sponsorUrl.Contains("://"))
+                        {
+                            sponsorUrl = "http://" + sponsorUrl;
+                        }
+                        linkSponsor.NavigateUrl = sponsorUrl;
                     }
 
                     ImageUtility.loadSponsorImage(reader["TenantID"].ToString(), imgSponsor);

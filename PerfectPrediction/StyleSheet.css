@@ -52,6 +52,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
+    display: inline-block;
 }
 
     .line1 span {
@@ -67,12 +68,13 @@ body {
 .line2 {
     font-size: 55px;
     font-family: "Open Sans";
+    display: inline-block;
 }
 
 .line3 {
     background-color: var(--color3);
     width: fit-content;
-    margin-top: 15px;
+    margin-top: 0px;
     margin-left: auto;
     margin-right: auto;
     padding: 5px;
@@ -102,7 +104,7 @@ body {
 }
 
     .form .label {
-        width: 300px;
+        width: var(--input-width);
         display: inline-block;
         text-align: right;
     }
@@ -162,5 +164,9 @@ body {
 
     input {
         width: 300px !important;
+    }
+
+    .line1, .line2 {
+        display: block;
     }
 }

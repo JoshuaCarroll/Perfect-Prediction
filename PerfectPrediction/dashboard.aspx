@@ -204,6 +204,9 @@ ORDER BY [GameTime]" >
             <asp:Image ID="imgSponsor" runat="server" />
             <asp:FileUpload ID="FileUploadSponsor" runat="server" />
             <br />
+            <asp:Label ID="Label11" runat="server" CssClass="label" Text="Sponsor URL"></asp:Label>
+            <asp:TextBox ID="txtSponsorUrl" runat="server"></asp:TextBox>
+            <br />
             <br />
             <asp:Button ID="btnSaveSettings" runat="server" OnClick="btnSaveSettings_Click" Text="Save" />
             <asp:Button ID="btnCancelSettings" runat="server" OnClick="btnCancelSettings_Click" Text="Cancel" />

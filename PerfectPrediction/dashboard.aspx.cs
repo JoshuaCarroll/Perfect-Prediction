@@ -256,7 +256,7 @@ WHERE Games.ID = @id";
             pnlSettings.Visible = true;
 
             // Load current values
-            string queryString = @"SELECT Username, Password, Name, Email from Tenants where ID = @Id";
+            string queryString = @"SELECT Username, Password, Name, Email, SponsorUrl from Tenants where ID = @Id";
 
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
             {
@@ -272,6 +272,7 @@ WHERE Games.ID = @id";
                     txtPassword.Text = reader["Password"].ToString();
                     txtName.Text = reader["Name"].ToString();
                     txtEmail.Text = reader["Email"].ToString();
+                    txtSponsorUrl.Text = reader["SponsorUrl"].ToString();
 
                     ImageUtility.loadSponsorImage(strTenantId, imgSponsor);
                 }
@@ -297,7 +298,7 @@ WHERE Games.ID = @id";
             }
             string strTenantId = Session["TenantID"].ToString();
 
-            string queryString = @"Update Tenants set Password = @password, Name = @name, Email = @email where ID = @id";
+            string queryString = @"Update Tenants set Password = @password, Name = @name, Email = @email, SponsorUrl = @sponsorUrl where ID = @id";
 
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
             {
@@ -306,6 +307,7 @@ WHERE Games.ID = @id";
                 command.Parameters.AddWithValue("@password", txtPassword.Text);
                 command.Parameters.AddWithValue("@name", txtName.Text);
                 command.Parameters.AddWithValue("@email", txtEmail.Text);
+                command.Parameters.AddWithValue("@sponsorUrl", txtSponsorUrl.Text);
                 command.Parameters.AddWithValue("@id", Session["TenantID"].ToString());
                 connection.Open();
 
