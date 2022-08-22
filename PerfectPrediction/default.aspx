@@ -16,9 +16,7 @@
 				<span>P</span><span>E</span><span>R</span><span>F</span><span>E</span><span>C</span><span>T</span>
 			</div>
 			<div class="line2">PREDICTION</div>
-			<div class="line3">PREDICT THE FINAL SCORE 
-                <br />
-                CORRECTLY & WIN!</div>
+			<div class="line3">PREDICT THE FINAL SCORE CORRECTLY & WIN!</div>
 			<div class="sponsorLogo">
                 <asp:HyperLink ID="linkSponsor" runat="server"><asp:Image ID="imgSponsor" runat="server" /></asp:HyperLink></div>
 

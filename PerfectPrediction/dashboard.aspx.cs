@@ -198,11 +198,11 @@ WHERE Games.ID = @id";
         protected void comboboxTeam_ItemInserting(object sender, AjaxControlToolkit.ComboBoxItemInsertEventArgs e)
         {
             AjaxControlToolkit.ComboBox cbSender = (AjaxControlToolkit.ComboBox)sender;
-            string teamName = e.Item.Text;
-            int newRecordID = insertTeam(teamName);
+            int newRecordID = insertTeam(e.Item.Text);
+            e.Item.Value = newRecordID.ToString();
 
-            cbSender.Items.Add(new ListItem(teamName, newRecordID.ToString()));
-            cbSender.SelectedValue = newRecordID.ToString();
+            cbSender.Items.Add(e.Item);
+            cbSender.SelectedValue = e.Item.Value;
         }
 
         protected int insertTeam(string teamName)
