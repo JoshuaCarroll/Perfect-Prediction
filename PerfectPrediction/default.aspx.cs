@@ -16,18 +16,10 @@ namespace PerfectPrediction
             hfDatetime.Value = getCentralTime().ToString();
 
             object gameId = Request.QueryString["g"];
-            int intGameId = 0;
+            object tenantId = Request.QueryString["t"];
+            int intId = 0;
 
-            if (gameId == null)
-            {
-                intGameId = 1;
-            }
-            else
-            {
-                int.TryParse(gameId.ToString(), out intGameId);
-            }
-
-            string sql = @"SELECT Games.HomeTeamID [HomeTeamID], Games.AwayTeamID [AwayTeamID], Games.GameTime [GameTime], Games.TenantID [TenantID],
+            string sqlGame = @"SELECT Games.ID [GameID], Games.HomeTeamID [HomeTeamID], Games.AwayTeamID [AwayTeamID], Games.GameTime [GameTime], Games.TenantID [TenantID],
 	HomeTeam.Name [HomeTeamName], AwayTeam.Name [AwayTeamName], Tenants.SponsorUrl
 FROM Games
 INNER JOIN Teams [HomeTeam] on Games.HomeTeamID = HomeTeam.ID
@@ -35,16 +27,54 @@ INNER JOIN Teams [AwayTeam] on Games.AwayTeamID = AwayTeam.ID
 INNER JOIN Tenants on Games.TenantID = Tenants.ID
 Where Games.ID = @id";
 
+            string sqlTenant = @"SELECT Top 1 Games.ID [GameID], Games.HomeTeamID [HomeTeamID], Games.AwayTeamID [AwayTeamID], Games.GameTime [GameTime], Games.TenantID [TenantID],
+	HomeTeam.Name [HomeTeamName], AwayTeam.Name [AwayTeamName], Tenants.SponsorUrl
+FROM Games
+INNER JOIN Teams [HomeTeam] on Games.HomeTeamID = HomeTeam.ID
+INNER JOIN Teams [AwayTeam] on Games.AwayTeamID = AwayTeam.ID
+INNER JOIN Tenants on Games.TenantID = Tenants.ID
+Where Games.TenantID = @id AND Games.GameTime > GETDATE() 
+ORDER by Games.GameTime Asc";
+
+            string sql = "";
+
+            if (gameId == null)
+            {
+                if (tenantId == null)
+                {
+                    intId = 1;
+                    sql = sqlGame;
+                }
+                else
+                {
+                    int.TryParse(tenantId.ToString(), out intId);
+                    sql = sqlTenant;
+                }
+            }
+            else
+            {
+                int.TryParse(gameId.ToString(), out intId);
+                sql = sqlGame;
+            }
+
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
             {
                 SqlCommand command = new SqlCommand(sql, connection);
-                command.Parameters.AddWithValue("@id", intGameId);
+                command.Parameters.AddWithValue("@id", intId);
                 connection.Open();
 
                 SqlDataReader reader = command.ExecuteReader();
                 try
                 {
                     reader.Read();
+
+                    // To create a random seed for anticaching on Facebook
+                    Random random = new Random();
+
+                    metaImage.Content = "https://perfectprediction.aa5jc.com/GetImage.ashx?g=" + reader["GameID"] + "&s=" + random.Next(99999);
+                    metaTitle.Content = String.Format("PERFECT PREDICTION: {0} vs {1}", reader["AwayTeamName"].ToString(), reader["HomeTeamName"].ToString());
+                    metaUrl.Content = "https://perfectprediction.aa5jc.com/?g=" + reader["GameID"];
+
                     string AwayTeamID = reader["AwayTeamID"].ToString();
                     string HomeTeamID = reader["HomeTeamID"].ToString();
 
@@ -75,10 +105,20 @@ Where Games.ID = @id";
                     lblAway.Text = reader["AwayTeamName"].ToString();
                     lblAway2.Text = lblAway.Text;
 
-                    lblGameStartDate.Text = DateTime.Parse(reader["GameTime"].ToString()).ToString("MMMM dd, yyyy h:mm tt");
+                    DateTime gameTime = DateTime.Parse(reader["GameTime"].ToString());
+                    lblGameStartDate.Text = gameTime.ToString("MMMM dd, yyyy h:mm tt");
 
                     linkTerms.Target = "_blank";
                     linkTerms.NavigateUrl = "terms.aspx?t=" + reader["TenantID"].ToString();
+
+
+                    DateTime currentCstTime = getCentralTime();
+
+                    if (gameTime.AddMinutes(30) < currentCstTime)
+                    {
+                        btnSubmit.Enabled = false;
+                        btnSubmit.Text = "ENTRIES ARE CLOSED";
+                    }
                 }
                 finally
                 {

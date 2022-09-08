@@ -19,17 +19,14 @@
         <asp:GridView ID="gridViewGames" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="sqlDataSourceGames" ForeColor="#333333" GridLines="None" Width="1678px" OnSelectedIndexChanged="gridViewGames_SelectedIndexChanged" BorderColor="#003366" BorderStyle="Solid" DataKeyNames="ID" CssClass="gridViewGames">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
-                <asp:CommandField ShowSelectButton="True" />
-                <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" SortExpression="ID" InsertVisible="False" />
-                <asp:BoundField DataField="AwayTeam" HeaderText="Away Team" SortExpression="AwayTeam" >
-                </asp:BoundField>
-                <asp:BoundField DataField="HomeTeam" HeaderText="Home Team" SortExpression="HomeTeam" >
-                </asp:BoundField>
-                <asp:BoundField DataField="GameTime" HeaderText="Game Time" SortExpression="GameTime" ReadOnly="True" >
-                </asp:BoundField>
-                <asp:BoundField DataField="Winner" HeaderText="Winner" SortExpression="Winner" ReadOnly="True">
-                </asp:BoundField>
-                <asp:BoundField DataField="QR Code" HeaderText="QR Code" ReadOnly="True" SortExpression="QR Code" HtmlEncode="False" />
+                <asp:CommandField SelectText="Edit" ShowSelectButton="True" />
+                <asp:BoundField DataField="ID" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="ID" />
+                <asp:BoundField DataField="Away Team" HeaderText="Away Team" SortExpression="Away Team" />
+                <asp:BoundField DataField="Home Team" HeaderText="Home Team" SortExpression="Home Team" />
+                <asp:BoundField DataField="Game Time" HeaderText="Game Time" ReadOnly="True" SortExpression="Game Time" />
+                <asp:BoundField DataField="Winner" HeaderText="Winner" ReadOnly="True" SortExpression="Winner" />
+                <asp:BoundField DataField="QR Code" HeaderText="QR Code" HtmlEncode="False" ReadOnly="True" SortExpression="QR Code" />
+                <asp:BoundField DataField="URL" HeaderText="URL" HtmlEncode="False" ReadOnly="True" SortExpression="URL" />
             </Columns>
             <EditRowStyle BackColor="#999999" />
             <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -44,44 +41,15 @@
         </asp:GridView>
         <asp:SqlDataSource ID="sqlDataSourceGames" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
             OldValuesParameterFormatString="original_{0}" 
-            SelectCommand="SELECT Games.ID, TeamsAway.Name [AwayTeam], TeamsHome.Name [HomeTeam], FORMAT(GameTime, 'MM/dd/yyyy h:mm tt') [GameTime], CONCAT(Predictions.Name, '   ', Predictions.Email) [Winner], CONCAT('&lt;a target=&quot;_blank&quot; href=&quot;https://api.qrserver.com/v1/create-qr-code/?data=https://perfectprediction.aa5jc.com/?g=', Games.ID,'&quot;&gt;&lt;img class=&quot;qrcode&quot; src=&quot;https://api.qrserver.com/v1/create-qr-code/?data=https://perfectprediction.aa5jc.com/?g=', Games.ID, '&amp;size=200x200&quot;/&gt;&lt;/a&gt;') [QR Code] FROM [Games] 
+            SelectCommand="SELECT Games.ID, TeamsAway.Name [Away Team], TeamsHome.Name [Home Team], FORMAT(GameTime, 'MM/dd/yyyy h:mm tt') [Game Time], CONCAT(Predictions.Name, '   ', Predictions.Email) [Winner], CONCAT('&lt;a target=&quot;_blank&quot; href=&quot;https://api.qrserver.com/v1/create-qr-code/?data=https://perfectprediction.aa5jc.com/?g=', Games.ID,'&quot;&gt;&lt;img class=&quot;qrcode&quot; src=&quot;https://api.qrserver.com/v1/create-qr-code/?data=https://perfectprediction.aa5jc.com/?g=', Games.ID, '&amp;size=200x200&quot;/&gt;&lt;/a&gt;') [QR Code], CONCAT('&lt;a target=&quot;_blank&quot; href=&quot;https://perfectprediction.aa5jc.com/?g=', Games.ID, '&quot;&gt;Link&lt;/a&gt;') [URL] FROM [Games] 
 INNER JOIN Teams [TeamsAway] on TeamsAway.Id = Games.AwayTeamID 
 INNER JOIN Teams [TeamsHome] on TeamsHome.Id = Games.HomeTeamID
 LEFT JOIN Predictions on Predictions.Id = Games.WinningPredictionID 
 WHERE (Games.TenantID = @TenantID) 
 ORDER BY [GameTime]" >
-            <DeleteParameters>
-                <asp:Parameter Name="original_Id" Type="Int32" />
-                <asp:Parameter Name="original_HomeTeamID" Type="Int32" />
-                <asp:Parameter Name="original_AwayTeamID" Type="Int32" />
-                <asp:Parameter Name="original_GameTime" Type="DateTime" />
-                <asp:Parameter Name="original_TenantID" Type="Int32" />
-                <asp:Parameter Name="original_WinningPredictionID" Type="Int32" />
-            </DeleteParameters>
-            <InsertParameters>
-                <asp:Parameter Name="Id" Type="Int32" />
-                <asp:Parameter Name="HomeTeamID" Type="Int32" />
-                <asp:Parameter Name="AwayTeamID" Type="Int32" />
-                <asp:Parameter Name="GameTime" Type="DateTime" />
-                <asp:Parameter Name="TenantID" Type="Int32" />
-                <asp:Parameter Name="WinningPredictionID" Type="Int32" />
-            </InsertParameters>
             <SelectParameters>
                 <asp:SessionParameter DefaultValue="1" Name="TenantID" SessionField="TenantID" Type="Int32" />
             </SelectParameters>
-            <UpdateParameters>
-                <asp:Parameter Name="HomeTeamID" Type="Int32" />
-                <asp:Parameter Name="AwayTeamID" Type="Int32" />
-                <asp:Parameter Name="GameTime" Type="DateTime" />
-                <asp:Parameter Name="TenantID" Type="Int32" />
-                <asp:Parameter Name="WinningPredictionID" Type="Int32" />
-                <asp:Parameter Name="original_Id" Type="Int32" />
-                <asp:Parameter Name="original_HomeTeamID" Type="Int32" />
-                <asp:Parameter Name="original_AwayTeamID" Type="Int32" />
-                <asp:Parameter Name="original_GameTime" Type="DateTime" />
-                <asp:Parameter Name="original_TenantID" Type="Int32" />
-                <asp:Parameter Name="original_WinningPredictionID" Type="Int32" />
-            </UpdateParameters>
         </asp:SqlDataSource>
         <asp:SqlDataSource ID="sqlDataSourceTeams" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [Teams] WHERE [Id] = @original_Id" InsertCommand="INSERT INTO [Teams] ([Name]) VALUES (@Name)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [Id], [Name] FROM [Teams] WHERE ([TenantID] = @TenantID) ORDER BY [Name]" UpdateCommand="UPDATE [Teams] SET [Name] = @Name WHERE [Id] = @original_Id">
             <DeleteParameters>

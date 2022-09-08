@@ -15,6 +15,33 @@ namespace PerfectPrediction
     {
 
         /// <summary>
+        /// metaImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlMeta metaImage;
+
+        /// <summary>
+        /// metaUrl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlMeta metaUrl;
+
+        /// <summary>
+        /// metaTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlMeta metaTitle;
+
+        /// <summary>
         /// form1 control.
         /// </summary>
         /// <remarks>
@@ -177,6 +204,15 @@ namespace PerfectPrediction
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
+        /// txtEmail_TextBoxWatermarkExtender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TextBoxWatermarkExtender txtEmail_TextBoxWatermarkExtender;
+
+        /// <summary>
         /// RegularExpressionValidator1 control.
         /// </summary>
         /// <remarks>
@@ -213,6 +249,15 @@ namespace PerfectPrediction
         protected global::System.Web.UI.WebControls.TextBox txtHomeScore;
 
         /// <summary>
+        /// txtHomeScore_TextBoxWatermarkExtender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TextBoxWatermarkExtender txtHomeScore_TextBoxWatermarkExtender;
+
+        /// <summary>
         /// RequiredFieldValidator2 control.
         /// </summary>
         /// <remarks>
@@ -238,6 +283,15 @@ namespace PerfectPrediction
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAwayScore;
+
+        /// <summary>
+        /// txtAwayScore_TextBoxWatermarkExtender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TextBoxWatermarkExtender txtAwayScore_TextBoxWatermarkExtender;
 
         /// <summary>
         /// RequiredFieldValidator3 control.

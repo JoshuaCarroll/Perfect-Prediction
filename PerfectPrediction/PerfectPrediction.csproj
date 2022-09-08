@@ -57,6 +57,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -77,6 +78,7 @@
     </Content>
     <Content Include="dashboard.aspx" />
     <Content Include="default.aspx" />
+    <Content Include="default_social.aspx" />
     <Content Include="Global.asax" />
     <Content Include="login.aspx" />
     <Content Include="StyleSheet.css" />
@@ -99,6 +101,16 @@
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="default_social.aspx.cs">
+      <DependentUpon>default_social.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default_social.aspx.designer.cs">
+      <DependentUpon>default_social.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetImage.ashx.cs">
+      <DependentUpon>GetImage.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -118,8 +130,10 @@
     <Compile Include="terms.aspx.designer.cs">
       <DependentUpon>terms.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebsiteToImage.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="GetImage.ashx" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

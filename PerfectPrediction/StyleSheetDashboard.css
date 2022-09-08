@@ -20,3 +20,8 @@
 .gridViewGames {
     max-width: 95%;
 }
+
+#imgSponsor {
+    max-width: 150px;
+    max-height: 150px;
+}
